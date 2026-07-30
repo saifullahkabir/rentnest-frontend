@@ -46,7 +46,7 @@ export default function Navbar() {
       profile: {
         name: "Saifullah Kabir",
         email: "saifullah@gmail.com",
-        role: "TENANT", // TENANT | LANDLORD | ADMIN
+        role: "ADMIN", // TENANT | LANDLORD | ADMIN
         profile: {
           profilePhoto: "https://i.ibb.co.com/RGk6d8MM/my.jpg",
         },
@@ -119,7 +119,7 @@ export default function Navbar() {
                 </Button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-10">
+                  <div className="absolute right-0 mt-3 w-64  rounded-lg shadow-lg border  py-2 z-10">
                     <div className="border-b px-4 py-4">
                       <p className="font-semibold">{user.data.profile.name}</p>
 
