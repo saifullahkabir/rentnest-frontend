@@ -8,13 +8,71 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+type RegisterFormData = {
+  name: string;
+  email: string;
+  phone?: string;
+  profileImage?: string;
+  password: string;
+  role: "TENANT" | "LANDLORD";
+};
+
+type Role = RegisterFormData["role"];
+
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
-  const [role, setRole] = useState("TENANT");
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      profileImage: "",
+      password: "",
+      role: "TENANT",
+    },
+  });
+
+  const onSubmit = async (data: RegisterFormData) => {
+    console.log(data);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        },
+      );
+
+      const result = await res.json();
+
+      if (result.success) {
+        toast.success(result.message || "Registration successfully");
+
+        router.push("/auth/login");
+      } else {
+        toast.error(result.message || "Registration failed");
+      }
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
-    <form className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* Full Name */}
       <div className="space-y-2">
         <Label>Full Name</Label>
@@ -22,8 +80,23 @@ export default function RegisterForm() {
         <div className="relative">
           <User className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
 
-          <Input placeholder="Your Name" className="pl-10 h-11" />
+          <Input
+            className="pl-10 h-11"
+            placeholder="Full Name"
+            {...register("name", {
+              required: "Full name is required",
+              minLength: {
+                value: 3,
+                message: "Minimum 3 characters",
+              },
+            })}
+          />
         </div>
+        {errors.name && (
+          <p className="ml-4 text-sm text-red-500">
+            {errors.name.message as string}
+          </p>
+        )}
       </div>
 
       {/* Email */}
@@ -33,11 +106,23 @@ export default function RegisterForm() {
         <div className="relative">
           <Mail className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
           <Input
-            type="email"
-            placeholder="example@gmail.com"
             className="pl-10 h-11"
+            type="email"
+            placeholder="Email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email",
+              },
+            })}
           />
         </div>
+        {errors.email && (
+          <p className="ml-4 text-sm text-red-500">
+            {errors.email.message as string}
+          </p>
+        )}
       </div>
 
       {/* Phone */}
@@ -46,8 +131,22 @@ export default function RegisterForm() {
 
         <div className="relative">
           <Phone className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="+8801XXXXXXXXX" className="pl-10 h-11" />
+          <Input
+            className="pl-10 h-11"
+            placeholder="Phone"
+            {...register("phone", {
+              pattern: {
+                value: /^(\+8801|01)[3-9]\d{8}$/,
+                message: "Invalid phone number",
+              },
+            })}
+          />
         </div>
+        {errors.phone && (
+          <p className=" ml-4 text-sm text-red-500">
+            {errors.phone.message as string}
+          </p>
+        )}
       </div>
 
       {/* Profile */}
@@ -56,21 +155,46 @@ export default function RegisterForm() {
 
         <div className="relative">
           <ImageIcon className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="https://..." className="pl-10 h-11" />
+          <Input
+            className="pl-10 h-11"
+            placeholder="Profile Image URL"
+            {...register("profileImage", {
+              pattern: {
+                value: /^https?:\/\/.+/,
+                message: "Invalid URL",
+              },
+            })}
+          />
         </div>
+
+        {errors.profileImage && (
+          <p className="ml-4 text-sm text-red-500">
+            {errors.profileImage.message as string}
+          </p>
+        )}
       </div>
 
       {/* Role */}
       <div className="space-y-2">
         <Label>Select Role</Label>
 
-        <Tabs value={role} onValueChange={setRole} className="w-full">
+        <Tabs
+          defaultValue="TENANT"
+          onValueChange={(value) => setValue("role", value as Role)}
+          className="w-full"
+        >
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="TENANT">Tenant</TabsTrigger>
-
             <TabsTrigger value="LANDLORD">Landlord</TabsTrigger>
           </TabsList>
         </Tabs>
+
+        <input
+          type="hidden"
+          {...register("role", {
+            required: "Role is required",
+          })}
+        />
       </div>
 
       {/* Password */}
@@ -80,11 +204,17 @@ export default function RegisterForm() {
         <div className="relative">
           <Lock className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
           <Input
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter password"
             className="pl-10 pr-11 h-11"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
           />
-
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -93,11 +223,17 @@ export default function RegisterForm() {
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         </div>
+
+        {errors.password && (
+          <p className="ml-4 text-sm text-red-500">
+            {errors.password.message as string}
+          </p>
+        )}
       </div>
 
       {/* Button */}
-      <Button type="submit" className="h-11 w-full rounded-xl text-base">
-        Create Account
+      <Button type="submit" disabled={isSubmitting} className="w-full h-11">
+        {isSubmitting ? "Creating..." : "Create Account"}
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">
