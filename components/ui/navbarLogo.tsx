@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Building2 } from "lucide-react";
+import { House } from "lucide-react";
 
 export default function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2">
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-        <Building2 className="h-5 w-5" />
+        <House className="h-5 w-5" />
       </div>
 
       <div className="leading-none">
@@ -13,7 +13,9 @@ export default function Logo() {
           Rent<span className="text-primary">Nest</span>
         </h1>
 
-        <p className="text-[11px] text-muted-foreground">Rental Marketplace</p>
+        <p className="text-[11px] text-muted-foreground">
+          Rental Marketplace
+        </p>
       </div>
     </Link>
   );
