@@ -10,9 +10,9 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import Logo from "../ui/navbarLogo";
 import ThemeToggle from "./theme-toggle";
-import { UserProps } from "@/lib/types";
 import { logout } from "@/service/logout";
 import { toast } from "sonner";
+import { UserProps } from "@/lib/types/user";
 
 // Navigation Items
 const navItems = [

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:px-8 py-12 md:py-16 xl:py-20 lg:grid-cols-2 md:items-center">
+      <div className="mx-auto grid lg:grid-cols-2 max-w-7xl gap-12 px-4 sm:px-6 lg:px-8 py-12 md:py-16 xl:py-20  md:items-center">
         {/* Left */}
         <div>
           <span className="rounded-full border bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
@@ -42,7 +42,9 @@ export default function HeroSection() {
               <ShieldCheck className="text-primary" />
               <div>
                 <p className="text-sm md:text-base font-semibold">Verified</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Listings</p>
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Listings
+                </p>
               </div>
             </div>
 
@@ -50,7 +52,9 @@ export default function HeroSection() {
               <Home className="text-primary" />
               <div>
                 <p className="text-sm md:text-base font-semibold">Easy</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Booking</p>
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Booking
+                </p>
               </div>
             </div>
 
@@ -58,7 +62,9 @@ export default function HeroSection() {
               <Building2 className="text-primary" />
               <div>
                 <p className="text-sm md:text-base font-semibold">Trusted</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Landlords</p>
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Landlords
+                </p>
               </div>
             </div>
           </div>
@@ -84,13 +90,17 @@ export default function HeroSection() {
           <div className="absolute -bottom-6 -left-6 rounded-2xl border bg-background p-3 lg:p-5 shadow-lg">
             <h4 className="text-xl lg:text-2xl xl:text-3xl font-bold">5K+</h4>
 
-            <p className="text-xs lg:text-sm text-muted-foreground">Happy Renters</p>
+            <p className="text-xs lg:text-sm text-muted-foreground">
+              Happy Renters
+            </p>
           </div>
 
           <div className="absolute -right-6 -top-6 rounded-2xl border bg-background p-3 lg:p-5 shadow-lg">
             <h4 className="text-xl lg:text-2xl xl:text-3xl font-bold">1K+</h4>
 
-            <p className="text-xs lg:text-sm text-muted-foreground">Verified Properties</p>
+            <p className="text-xs lg:text-sm text-muted-foreground">
+              Verified Properties
+            </p>
           </div>
         </div>
       </div>
