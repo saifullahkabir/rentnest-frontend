@@ -15,7 +15,6 @@ export default function PropertyCard({ property }: Props) {
   return (
     <div className="group overflow-hidden rounded-2xl border bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       {/* Image */}
-
       <div className="relative h-60 overflow-hidden">
         <Image
           src={property.image}
@@ -26,7 +25,6 @@ export default function PropertyCard({ property }: Props) {
         />
 
         {/* Availability */}
-
         <Badge
           className={`absolute left-4 top-4 rounded-full px-3 py-1
             ${
@@ -39,25 +37,20 @@ export default function PropertyCard({ property }: Props) {
         </Badge>
 
         {/* Wishlist */}
-
         <button className="absolute right-4 top-4 rounded-full bg-white/90 p-2 transition hover:bg-white">
           <Heart className="h-5 w-5" />
         </button>
       </div>
 
       {/* Content */}
-
       <div className="space-y-5 p-5">
         {/* Category */}
-
         <Badge variant="secondary">{property.category.name}</Badge>
 
         {/* Title */}
-
         <h3 className="line-clamp-1 text-xl font-semibold">{property.title}</h3>
 
         {/* Location */}
-
         <div className="flex items-center gap-2 text-muted-foreground">
           <MapPin size={18} />
 
@@ -65,7 +58,6 @@ export default function PropertyCard({ property }: Props) {
         </div>
 
         {/* Beds + Baths */}
-
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <BedDouble size={18} />
@@ -81,7 +73,6 @@ export default function PropertyCard({ property }: Props) {
         </div>
 
         {/* Landlord */}
-
         <div className="flex items-center gap-3 border-t pt-4">
           {property.landlord.profileImage ? (
             <Image
@@ -106,7 +97,6 @@ export default function PropertyCard({ property }: Props) {
         </div>
 
         {/* Price + Button */}
-
         <div className="flex items-center justify-between border-t pt-5">
           <div>
             <p className="text-2xl font-bold text-primary">
