@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/shared/Navbar";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { getMe } from "@/service/getMe";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -32,11 +33,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getMe();
+  console.log(user);
+
   return (
     <html
       lang="en"
@@ -51,7 +55,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster position="top-center" richColors />
-          <Navbar />
+          <Navbar user={user} />
           {children}
         </ThemeProvider>
       </body>

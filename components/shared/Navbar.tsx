@@ -10,6 +10,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import Logo from "../ui/navbarLogo";
 import ThemeToggle from "./theme-toggle";
+import { UserProps } from "@/lib/types";
 
 // Navigation Items
 const navItems = [
@@ -31,7 +32,7 @@ const navItems = [
   },
 ];
 
-export default function Navbar() {
+export default function Navbar({ user }: UserProps) {
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -41,25 +42,12 @@ export default function Navbar() {
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
-  const user = {
-    data: {
-      profile: {
-        name: "Saifullah Kabir",
-        email: "saifullah@gmail.com",
-        role: "ADMIN", // TENANT | LANDLORD | ADMIN
-        profile: {
-          profilePhoto: "https://i.ibb.co.com/RGk6d8MM/my.jpg",
-        },
-      },
-    },
-  };
-
   const handleLogout = async () => {};
 
   const dashboardHref =
-    user.data.profile.role === "TENANT"
+    user?.data?.role === "TENANT"
       ? "/dashboard"
-      : user.data.profile.role === "LANDLORD"
+      : user?.data?.role === "LANDLORD"
         ? "/dashboard/landlord"
         : "/dashboard/admin";
 
@@ -95,7 +83,7 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <ThemeToggle />
             {/* User */}
-            {user ? (
+            {user?.data ? (
               <div className="relative">
                 <Button
                   variant="outline"
@@ -104,14 +92,14 @@ export default function Navbar() {
                   className="flex items-center justify-center  transition-all overflow-hidden cursor-pointer"
                   aria-label="User menu"
                 >
-                  {user.data?.profile.profile.profilePhoto ? (
+                  {user?.data?.profileImage ? (
                     <Image
-                      src={user.data?.profile.profile.profilePhoto}
-                      alt={user.data?.profile.name}
-                      width={20}
-                      height={20}
+                      src={user.data.profileImage}
+                      alt={user.data.name}
+                      width={40}
+                      height={40}
                       unoptimized
-                      className="w-full h-full object-cover"
+                      className="h-full w-full object-cover"
                     />
                   ) : (
                     <User className="text-primary" strokeWidth={1.8} />
@@ -121,10 +109,10 @@ export default function Navbar() {
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-3 w-64  rounded-lg shadow-lg border  py-2 z-10">
                     <div className="border-b px-4 py-4">
-                      <p className="font-semibold">{user.data.profile.name}</p>
+                      <p className="font-semibold">{user?.data?.name}</p>
 
                       <p className="text-sm text-muted-foreground">
-                        {user.data.profile.email}
+                        {user?.data?.email}
                       </p>
                     </div>
 
@@ -148,7 +136,7 @@ export default function Navbar() {
                 )}
               </div>
             ) : (
-              <Link href="/login">
+              <Link href="/auth/login">
                 <Button className="rounded-full px-6">Login</Button>
               </Link>
             )}
