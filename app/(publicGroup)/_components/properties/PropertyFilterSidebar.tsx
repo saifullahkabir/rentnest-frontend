@@ -35,12 +35,16 @@ export default function PropertyFilterSidebar() {
     router.replace(`${pathname}?${params.toString()}`);
   };
 
+  const handleReset = () => {
+    router.replace(pathname);
+  };
+
   return (
     <aside className="rounded-xl border bg-card p-5 h-fit sticky top-24">
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-lg">Filters</h2>
 
-        <Button variant="ghost" size="sm">
+        <Button variant="outline" size="sm" onClick={handleReset}>
           Reset
         </Button>
       </div>
@@ -99,7 +103,6 @@ export default function PropertyFilterSidebar() {
           />
         </div>
 
-        {/* Sort */}
         {/* Sort */}
         <div className="space-y-2">
           <Label>Sort By</Label>
