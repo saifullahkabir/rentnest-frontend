@@ -4,6 +4,8 @@ import PropertyCount from "./PropertyCount";
 import PropertyList from "./PropertyList";
 import PropertyPagination from "./PropertyPagination";
 import { IPropertyQuery } from "@/lib/types/property";
+import { Suspense } from "react";
+import PropertySkeletonGrid from "../property/PropertySkeletonGrid";
 
 export default function PropertiesLayout({
   query,
@@ -23,8 +25,9 @@ export default function PropertiesLayout({
 
         <main className="space-y-6">
           <PropertyCount />
-
-          <PropertyList query={query} />
+          <Suspense fallback={<PropertySkeletonGrid />}>
+            <PropertyList query={query} />
+          </Suspense>
 
           <PropertyPagination />
         </main>
