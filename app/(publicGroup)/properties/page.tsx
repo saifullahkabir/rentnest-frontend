@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import PropertiesLayout from "../_components/properties/PropertiesLayout";
 
 export default function PropertiesPage() {
   return (
-    <div>PropertiesPage</div>
-  )
+    <div>
+      <PropertiesLayout />
+    </div>
+  );
 }

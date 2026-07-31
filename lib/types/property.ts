@@ -36,3 +36,16 @@ export type PropertyResponse = {
 
   data: Property[];
 };
+
+export interface IPropertyQuery {
+  searchTerm?: string;
+  location?: string;
+  categoryId?: string;
+  availability?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  sortBy?: string;
+  sortOrder?: string;
+  page?: string;
+  limit?: string;
+}
