@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Menu, X, LogOut, User, LayoutDashboard } from "lucide-react";
 
@@ -11,6 +11,8 @@ import Image from "next/image";
 import Logo from "../ui/navbarLogo";
 import ThemeToggle from "./theme-toggle";
 import { UserProps } from "@/lib/types";
+import { logout } from "@/service/logout";
+import { toast } from "sonner";
 
 // Navigation Items
 const navItems = [
@@ -34,6 +36,7 @@ const navItems = [
 
 export default function Navbar({ user }: UserProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -42,7 +45,19 @@ export default function Navbar({ user }: UserProps) {
 
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
-  const handleLogout = async () => {};
+  const handleLogout = async () => {
+    try {
+      setIsDropdownOpen(false);
+
+      await logout();
+
+      toast.success("Logged out successfully");
+      router.replace("/auth/login");
+      router.refresh();
+    } catch {
+      toast.error("Logout failed");
+    }
+  };
 
   const dashboardHref =
     user?.data?.role === "TENANT"
