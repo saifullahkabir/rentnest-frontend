@@ -1,10 +1,16 @@
-import React from "react";
+import { IPropertyQuery } from "@/lib/types/property";
 import PropertiesLayout from "../_components/properties/PropertiesLayout";
 
-export default function PropertiesPage() {
+export default async function PropertiesPage({
+  searchParams,
+}: {
+  searchParams: Promise<IPropertyQuery>;
+}) {
+  const query = await searchParams;
+
   return (
     <div>
-      <PropertiesLayout />
+      <PropertiesLayout query={query} />
     </div>
   );
 }
