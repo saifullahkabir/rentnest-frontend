@@ -1,4 +1,5 @@
 import { getPropertyById } from "../../_action/property/getPropertyById";
+import { getPropertyReviews } from "../../_action/property/getPropertyReviews";
 import PropertyDetails from "../../_components/propertyDetails/PropertyDetails";
 
 type PropertyDetailsPageProps = {
@@ -13,10 +14,11 @@ export default async function PropertyDetailsPage({
   const { id } = await params;
 
   const property = await getPropertyById(id);
+  const reviews = await getPropertyReviews(id);
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <PropertyDetails property={property.data} />
+      <PropertyDetails property={property.data} reviews={reviews} />
     </main>
   );
 }

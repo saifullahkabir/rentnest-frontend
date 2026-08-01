@@ -14,6 +14,12 @@ export type PropertyReview = {
   };
 };
 
+export type PropertyReviewsResponse = {
+  averageRating: number;
+  totalReviews: number;
+  reviews: PropertyReview[];
+};
+
 export type Property = {
   id: string;
   title: string;
