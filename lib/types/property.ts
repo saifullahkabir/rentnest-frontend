@@ -1,3 +1,19 @@
+export type PropertyReview = {
+  id: string;
+  tenantId: string;
+  propertyId: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
+
+  tenant: {
+    id: string;
+    name: string;
+    profileImage: string | null;
+  };
+};
+
 export type Property = {
   id: string;
   title: string;
@@ -27,6 +43,8 @@ export type Property = {
     phone: string | null;
     profileImage: string | null;
   };
+
+  reviews: PropertyReview[];
 };
 
 export type PropertyResponse = {

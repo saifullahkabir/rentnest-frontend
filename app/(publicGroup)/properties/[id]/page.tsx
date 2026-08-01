@@ -1,11 +1,22 @@
+import { getPropertyById } from "../../_action/property/getPropertyById";
+import PropertyDetails from "../../_components/propertyDetails/PropertyDetails";
 
-export default async function PropertiesByIdPage({
+type PropertyDetailsPageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+export default async function PropertyDetailsPage({
   params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-     const { id } = await params;
+}: PropertyDetailsPageProps) {
+  const { id } = await params;
+
+  const property = await getPropertyById(id);
+
   return (
-    <div>PropertyByIdPage {id}</div>
-  )
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <PropertyDetails property={property.data} />
+    </main>
+  );
 }
