@@ -7,6 +7,7 @@ import { IPropertyQuery } from "@/lib/types/property";
 import { Suspense } from "react";
 import PropertySkeletonGrid from "../property/PropertySkeletonGrid";
 import { getCategories } from "../../_action/category/getCategories";
+import { getPropertyMeta } from "../../_action/property/getPropertyMeta";
 
 export default async function PropertiesLayout({
   query,
@@ -14,6 +15,9 @@ export default async function PropertiesLayout({
   query?: IPropertyQuery;
 }) {
   const categories = await getCategories();
+
+  const meta = await getPropertyMeta({ query });
+  console.log("metaaaaaaaaaaaaaaaaaa", meta);
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
@@ -27,12 +31,12 @@ export default async function PropertiesLayout({
         </aside>
 
         <main className="space-y-6">
-          <PropertyCount />
+          <PropertyCount total={meta.total} />
           <Suspense fallback={<PropertySkeletonGrid />}>
             <PropertyList query={query} />
           </Suspense>
 
-          <PropertyPagination />
+          <PropertyPagination totalPages={meta.totalPages} />
         </main>
       </div>
     </section>

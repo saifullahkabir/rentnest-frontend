@@ -8,9 +8,16 @@ export default async function PropertiesPage({
 }) {
   const query = await searchParams;
 
+  const propertyQuery: IPropertyQuery = {
+    ...query,
+    limit: query.limit || "6",
+  };
+
+  // console.log("propertyQuery =======>", propertyQuery);
+
   return (
     <div>
-      <PropertiesLayout query={query} />
+      <PropertiesLayout query={propertyQuery} />
     </div>
   );
 }
