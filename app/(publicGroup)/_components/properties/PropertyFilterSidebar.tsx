@@ -14,7 +14,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function PropertyFilterSidebar() {
+type Category = {
+  id: string;
+  name: string;
+};
+
+type Props = {
+  categories: Category[];
+};
+
+export default function PropertyFilterSidebar({ categories }: Props) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -75,6 +84,30 @@ export default function PropertyFilterSidebar() {
         </div>
 
         {/* Category */}
+        <div className="space-y-2">
+          <Label>Category</Label>
+
+          <Select
+            defaultValue={searchParams.get("categoryId") || ""}
+            onValueChange={(value) =>
+              updateQuery({
+                categoryId: value,
+              })
+            }
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="All Categories" />
+            </SelectTrigger>
+
+            <SelectContent>
+              {categories.map((category) => (
+                <SelectItem key={category.id} value={category.id}>
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
 
         {/* Price */}
         <div className="space-y-3">

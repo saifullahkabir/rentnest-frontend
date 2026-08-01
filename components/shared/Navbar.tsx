@@ -122,7 +122,7 @@ export default function Navbar({ user }: UserProps) {
                 </Button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-64  rounded-lg shadow-lg border  py-2 z-10">
+                  <div className="absolute right-0 mt-3 w-64  rounded-lg shadow-lg border  py-2 z-10 bg-background backdrop-blur supports-backdrop-filter:bg-background/70">
                     <div className="border-b px-4 py-4">
                       <p className="font-semibold">{user?.data?.name}</p>
 
@@ -198,7 +198,7 @@ export default function Navbar({ user }: UserProps) {
       {isDropdownOpen && (
         <div
           onClick={() => setIsDropdownOpen(false)}
-          className="fixed inset-0 z-0"
+          className="fixed inset-0 z-10"
         />
       )}
     </>
