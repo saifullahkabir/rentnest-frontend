@@ -17,7 +17,6 @@ export default async function PropertiesLayout({
   const categories = await getCategories();
 
   const meta = await getPropertyMeta({ query });
-  console.log("metaaaaaaaaaaaaaaaaaa", meta);
 
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">

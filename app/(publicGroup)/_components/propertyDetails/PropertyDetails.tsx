@@ -31,6 +31,8 @@ export default function PropertyDetails({
         </div>
 
         <PropertyRentalCard
+          propertyId={property.id}
+          propertyTitle={property.title}
           rentAmount={property.rentAmount}
           availability={property.availability}
         />

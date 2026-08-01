@@ -9,7 +9,7 @@ export default async function PropertyList({
   query?: IPropertyQuery;
 }) {
   const properties = await getProperties({ query });
-  console.log("Properties====>", properties);
+  // console.log("Properties====>", properties);
 
   if (!properties.data.length) {
     return <PropertyEmpty />;
