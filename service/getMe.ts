@@ -1,20 +1,30 @@
-"use server";
-
-import { cookies } from "next/headers";
+import { isAccessTokenExist } from "@/service/isAccessTokenExist";
 
 export const getMe = async () => {
-  const cookieStore = await cookies();
+  const accessToken = await isAccessTokenExist();
 
-  const cookieHeader = cookieStore.toString();
+  // User is not logged in
+  if (!accessToken) {
+    return null;
+  }
 
-  const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/me`, {
-    headers: {
-      Cookie: cookieHeader,
-    },
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/me`, {
+      method: "GET",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+      cache: "no-store",
+    });
 
-  const result = await res.json();
+    const result = await res.json();
 
-  return result;
+    if (!res.ok || !result.success) {
+      return null;
+    }
+
+    return result;
+  } catch {
+    return null;
+  }
 };

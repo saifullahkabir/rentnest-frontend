@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { isAccessTokenExist } from "@/service/isAccessTokenExist";
 
 interface CreateRentalRequestPayload {
   propertyId: string;
@@ -9,14 +9,7 @@ interface CreateRentalRequestPayload {
 }
 
 export async function createRentalRequest(payload: CreateRentalRequestPayload) {
-  const cookieStore = await cookies();
-
-  const accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-
-  if (!accessToken && !refreshToken) {
-    throw new Error("You are not logged in.");
-  }
+  const accessToken = await isAccessTokenExist();
 
   const res = await fetch(
     `${process.env.BACKEND_API_URL}/api/rental-requests`,
@@ -25,7 +18,7 @@ export async function createRentalRequest(payload: CreateRentalRequestPayload) {
       headers: {
         Cookie: `accessToken=${accessToken}`,
 
-        "Content-Type": "application/josn",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
       cache: "no-store",
