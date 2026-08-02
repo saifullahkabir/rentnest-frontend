@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import Navbar from "@/components/shared/Navbar";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
-import { getMe } from "@/service/getMe";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -38,9 +36,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getMe();
-  console.log(user);
-
   return (
     <html
       lang="en"
@@ -55,7 +50,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Toaster position="top-center" richColors />
-          <Navbar user={user} />
+
           {children}
         </ThemeProvider>
       </body>

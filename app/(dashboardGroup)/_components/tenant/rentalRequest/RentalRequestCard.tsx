@@ -11,7 +11,6 @@ import {
   Clock3,
   MapPin,
   MessageSquare,
-  Wallet,
   CreditCard,
   Star,
   XCircle,
