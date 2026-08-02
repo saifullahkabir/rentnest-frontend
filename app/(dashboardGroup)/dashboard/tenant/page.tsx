@@ -1,6 +1,6 @@
 
 
-export default function TenantPage() {
+export default function TenantDashboardPage() {
   return (
     <div>TenantPage</div>
   )

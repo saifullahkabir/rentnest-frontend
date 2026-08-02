@@ -11,7 +11,6 @@ import {
   MapPin,
   MessageSquare,
   User,
-  Wallet,
   XCircle,
 } from "lucide-react";
 
@@ -19,6 +18,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { LandlordRentalRequest } from "@/lib/types/landlord-rental-request";
+import { useState } from "react";
+import {
+  RentalRequestStatus,
+  updateRentalRequestStatus,
+} from "../../_actions/landlord-actions/landlordRentalRequests";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type RentalRequestCardProps = {
   request: LandlordRentalRequest;
@@ -63,9 +69,31 @@ const statusConfig = {
 
 export default function RentalRequestCard({ request }: RentalRequestCardProps) {
   const { tenant, property } = request;
-
   const status = statusConfig[request.status];
   const StatusIcon = status.icon;
+
+  //* for status update
+  const [isUpdating, setIsUpdating] = useState(false);
+  const router = useRouter();
+
+  const handleStatusUpdate = async (status: RentalRequestStatus) => {
+    try {
+      setIsUpdating(true);
+
+      const result = await updateRentalRequestStatus(request.id, status);
+
+      toast.success(result.message || "Rental request updated successfully.");
+      router.refresh();
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to update rental request.",
+      );
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   return (
     <article className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
@@ -234,16 +262,26 @@ export default function RentalRequestCard({ request }: RentalRequestCardProps) {
             {request.status === "PENDING" && (
               <div className="grid grid-cols-2 gap-2 sm:flex">
                 <Button
+                  type="button"
                   variant="outline"
+                  disabled={isUpdating}
+                  onClick={() => handleStatusUpdate("REJECTED")}
                   className="rounded-xl border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 dark:border-red-900/50 dark:hover:bg-red-950/30"
                 >
                   <XCircle className="h-4 w-4" />
-                  Reject
+
+                  {isUpdating ? "Updating..." : "Reject"}
                 </Button>
 
-                <Button className="rounded-xl">
+                <Button
+                  type="button"
+                  disabled={isUpdating}
+                  onClick={() => handleStatusUpdate("APPROVED")}
+                  className="rounded-xl"
+                >
                   <CheckCircle2 className="h-4 w-4" />
-                  Approve
+
+                  {isUpdating ? "Updating..." : "Approve"}
                 </Button>
               </div>
             )}
