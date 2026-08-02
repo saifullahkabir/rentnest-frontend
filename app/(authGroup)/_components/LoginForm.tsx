@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -20,7 +20,9 @@ type LoginFormData = {
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirectTo = searchParams.get("redirectTo") || "";
 
   const {
     register,
@@ -34,20 +36,13 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    try {
-      const result = await loginAction(data);
+    const result = await loginAction(data, redirectTo);
 
-      if (result.success) {
-        toast.success(result.message || "Login successful");
-
-        router.push("/");
-        router.refresh();
-      } else {
-        toast.error(result.message || "Login failed");
-      }
-    } catch {
-      toast.error("Something went wrong");
-    }
+    // if (result.success) {
+    //   toast.success(result.message || "Login successful");
+    // } else {
+    //   toast.error(result.message || "Login failed");
+    // }
   };
 
   return (
