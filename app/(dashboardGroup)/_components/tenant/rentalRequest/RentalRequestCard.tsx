@@ -62,20 +62,16 @@ const statusConfig = {
   },
 } as const;
 
-export default function RentalRequestCard({
-  request,
-}: RentalRequestCardProps) {
+export default function RentalRequestCard({ request }: RentalRequestCardProps) {
   const { property } = request;
 
   const status = statusConfig[request.status];
   const StatusIcon = status.icon;
 
   return (
-    <section className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+    <section className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex min-h-60 flex-col sm:flex-row">
-        {/* =========================================================
-            IMAGE
-        ========================================================= */}
+        {/* Image */}
         <div className="relative h-52 shrink-0 overflow-hidden sm:h-auto sm:w-64 lg:w-72">
           <Image
             src={property.image}
@@ -109,9 +105,7 @@ export default function RentalRequestCard({
           </div>
         </div>
 
-        {/* =========================================================
-            CONTENT
-        ========================================================= */}
+        {/*======> Content */}
         <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
           {/* Top section */}
           <div className="flex items-start justify-between gap-4">
@@ -132,9 +126,7 @@ export default function RentalRequestCard({
                   ৳{property.rentAmount.toLocaleString()}
                 </span>
 
-                <span className="text-xs text-muted-foreground">
-                  /month
-                </span>
+                <span className="text-xs text-muted-foreground">/month</span>
               </div>
             </div>
 
@@ -148,17 +140,13 @@ export default function RentalRequestCard({
             </Badge>
           </div>
 
-          {/* =========================================================
-              PROPERTY DETAILS
-          ========================================================= */}
+          {/* =====> PROPERTY DETAILS */}
           <div className="mt-4 grid grid-cols-3 divide-x rounded-xl border bg-muted/30 py-2.5">
             <div className="flex items-center justify-center gap-2 px-2">
               <BedDouble className="h-4 w-4 text-muted-foreground" />
 
               <div>
-                <p className="text-xs font-semibold">
-                  {property.bedrooms}
-                </p>
+                <p className="text-xs font-semibold">{property.bedrooms}</p>
 
                 <p className="hidden text-[10px] text-muted-foreground xs:block">
                   Bedrooms
@@ -170,9 +158,7 @@ export default function RentalRequestCard({
               <Bath className="h-4 w-4 text-muted-foreground" />
 
               <div>
-                <p className="text-xs font-semibold">
-                  {property.bathrooms}
-                </p>
+                <p className="text-xs font-semibold">{property.bathrooms}</p>
 
                 <p className="hidden text-[10px] text-muted-foreground xs:block">
                   Bathrooms
@@ -186,13 +172,10 @@ export default function RentalRequestCard({
               <div>
                 <p className="text-xs font-semibold">
                   {request.moveInDate
-                    ? new Date(request.moveInDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "2-digit",
-                          month: "short",
-                        },
-                      )
+                    ? new Date(request.moveInDate).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                      })
                     : "—"}
                 </p>
 
@@ -227,14 +210,11 @@ export default function RentalRequestCard({
               <p className="text-[11px] text-muted-foreground">
                 Submitted{" "}
                 <span className="font-medium text-foreground">
-                  {new Date(request.createdAt).toLocaleDateString(
-                    "en-GB",
-                    {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    },
-                  )}
+                  {new Date(request.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </span>
               </p>
 
@@ -262,9 +242,7 @@ export default function RentalRequestCard({
                 )}
 
                 {request.status === "APPROVED" && (
-                  <Button
-                    className="rounded-lg bg-blue-600 px-4 shadow-sm shadow-blue-600/20 hover:bg-blue-700"
-                  >
+                  <Button className="rounded-lg bg-blue-600 px-4 shadow-sm shadow-blue-600/20 hover:bg-blue-700">
                     <CreditCard className="h-4 w-4" />
                     Pay Now
                   </Button>
