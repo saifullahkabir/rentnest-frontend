@@ -2,54 +2,58 @@
 
 RentNest is a modern rental property platform built with **Next.js, TypeScript, Tailwind CSS, and Shadcn UI**. It provides separate experiences for **Tenants, Landlords, and Admins**.
 
+## Live URL
+
+**Client:** https://rentnest-rental-platform.vercel.app/
+
 ## Features
 
-- Role-based authentication and dashboards
-- Property browsing and rental requests
-- Landlord property management
-- Rental request management
-- Stripe payment integration
-- Tenant payment history
-- Landlord payment tracking
-- Admin user, property, rental, payment, and category management
-- Responsive and dark-mode friendly UI
-- Structured error handling with toast notifications
+* Role-based authentication and dashboards
+* Property browsing and rental requests
+* Landlord property management
+* Rental request management
+* Stripe payment integration
+* Tenant payment history
+* Landlord payment tracking
+* Admin user, property, rental, payment, and category management
+* Responsive and dark-mode friendly UI
+* Structured error handling with toast notifications
 
 ## Tech Stack
 
-- Next.js
-- TypeScript
-- Tailwind CSS
-- Shadcn UI
-- React
-- Stripe
-- REST API
+* Next.js
+* TypeScript
+* Tailwind CSS
+* Shadcn UI
+* React
+* Stripe
+* REST API
 
 ## User Roles
 
 ### Tenant
 
-- Browse properties
-- Send rental requests
-- Make Stripe payments
-- View payment history
-- Manage rental activities
+* Browse properties
+* Send rental requests
+* Make Stripe payments
+* View payment history
+* View rental activities
 
 ### Landlord
 
-- Create, update, and delete properties
-- Manage rental requests
-- View received payments
-- View dashboard statistics
+* Create, update, and delete properties
+* Manage rental requests
+* View received payments
+* View dashboard statistics
 
 ### Admin
 
-- View dashboard statistics
-- Manage users
-- Manage properties
-- Manage rental requests
-- Manage payments
-- Create, update, and delete categories
+* View dashboard statistics
+* Manage users
+* View properties
+* View rental requests
+* View payments
+* Create, update, and delete categories
 
 ## Payment
 
