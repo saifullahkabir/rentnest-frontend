@@ -37,6 +37,11 @@ const roleMenu = {
       href: "/dashboard/tenant/rental-requests",
       icon: GitPullRequestArrow,
     },
+    {
+      label: "My Payments",
+      href: "/dashboard/tenant/payments",
+      icon: Wallet,
+    },
   ],
 
   LANDLORD: [

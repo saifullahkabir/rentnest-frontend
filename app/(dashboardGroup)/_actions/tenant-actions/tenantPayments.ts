@@ -34,3 +34,30 @@ export const createPayment = async (payload: ICreatePayment) => {
 
   return result;
 };
+
+export const getMyPayments = async () => {
+  const accessToken = await isAccessTokenExist();
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/payments/my-payments`,
+    {
+      method: "GET",
+      headers: {
+        Cookie: `accessToken=${accessToken}`,
+      },
+      cache: "no-store",
+    },
+  );
+
+  const result = await res.json();
+
+  if (!res.ok || !result.success) {
+    return {
+      success: false,
+      message: result.message || "Failed to retrieve payments.",
+      data: [],
+    };
+  }
+
+  return result;
+};
