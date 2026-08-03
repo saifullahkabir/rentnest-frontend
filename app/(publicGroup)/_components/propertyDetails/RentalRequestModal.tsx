@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { CalendarDays, Loader2, MessageSquare, Send } from "lucide-react";
 import { toast } from "sonner";
 
@@ -32,6 +33,8 @@ export default function RentalRequestModal({
   open,
   onOpenChange,
 }: RentalRequestModalProps) {
+  const router = useRouter();
+
   const [moveInDate, setMoveInDate] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,11 +55,7 @@ export default function RentalRequestModal({
         }),
       };
 
-      console.log("payload====>", payload);
-
       const result = await createRentalRequest(payload);
-
-      console.log("result====>", result);
 
       if (result.success) {
         toast.success(
@@ -67,6 +66,11 @@ export default function RentalRequestModal({
         setMessage("");
 
         onOpenChange(false);
+
+        // Redirect to tenant rental requests page
+        router.push("/dashboard/tenant/rental-requests");
+      } else {
+        toast.error(result.message || "Failed to submit rental request.");
       }
     } catch (error) {
       toast.error(
@@ -92,7 +96,7 @@ export default function RentalRequestModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="w-[calc(100%-2rem)] max-w-lg rounded-2xl p-0 overflow-hidden">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-lg overflow-hidden rounded-2xl p-0">
         <form onSubmit={handleSubmit}>
           {/* Header */}
           <DialogHeader className="border-b bg-muted/30 px-5 py-5 sm:px-6">
