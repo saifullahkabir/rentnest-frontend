@@ -3,16 +3,21 @@ import { getLandlordProperties } from "../../_actions/landlord-actions/landlordP
 import { getLandlordRentalRequests } from "../../_actions/landlord-actions/landlordRentalRequests";
 import { LandlordRentalRequest } from "@/lib/types/landlord-rental-request";
 import LandlordDashboardStats from "../../_components/landlord/LandlordDashboardStats";
+import { getLandlordPayments } from "../../_actions/landlord-actions/landlordPayments";
+import { LandlordPayment } from "@/lib/types/landlord-payment";
 
 export default async function LandlordDashboardPage() {
-  const [propertiesResult, requestsResult] = await Promise.all([
+  const [propertiesResult, requestsResult, paymentsResult] = await Promise.all([
     getLandlordProperties(),
     getLandlordRentalRequests(),
+    getLandlordPayments(),
   ]);
 
   const properties = propertiesResult.data ?? [];
   const requests = requestsResult.data ?? [];
+  const payments = paymentsResult.data ?? [];
 
+  // Property Stats
   const totalProperties = properties.length;
 
   const availableProperties = properties.filter(
@@ -23,6 +28,7 @@ export default async function LandlordDashboardPage() {
     (property: Property) => property.availability === "UNAVAILABLE",
   ).length;
 
+  // Rental Request Stats
   const totalRequests = requests.length;
 
   const pendingRequests = requests.filter(
@@ -33,9 +39,19 @@ export default async function LandlordDashboardPage() {
     (request: LandlordRentalRequest) => request.status === "APPROVED",
   ).length;
 
+  const activeRequests = requests.filter(
+    (request: LandlordRentalRequest) => request.status === "ACTIVE",
+  ).length;
+
+  const completedRequests = requests.filter(
+    (request: LandlordRentalRequest) => request.status === "COMPLETED",
+  ).length;
+
   const rejectedRequests = requests.filter(
     (request: LandlordRentalRequest) => request.status === "REJECTED",
   ).length;
+
+  const totalPayments = payments.length;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -56,7 +72,10 @@ export default async function LandlordDashboardPage() {
         totalRequests={totalRequests}
         pendingRequests={pendingRequests}
         approvedRequests={approvedRequests}
+        activeRequests={activeRequests}
+        completedRequests={completedRequests}
         rejectedRequests={rejectedRequests}
+        totalPayments={totalPayments}
       />
     </div>
   );

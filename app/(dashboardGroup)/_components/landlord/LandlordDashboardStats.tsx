@@ -7,6 +7,11 @@ import {
   XCircle,
   Home,
   ClipboardList,
+  Wallet,
+  ActivitySquare,
+  ShieldCheck,
+  CircleCheck,
+  CircleX,
 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,7 +23,10 @@ type LandlordDashboardStatsProps = {
   totalRequests: number;
   pendingRequests: number;
   approvedRequests: number;
+  activeRequests: number;
+  completedRequests: number;
   rejectedRequests: number;
+  totalPayments: number;
 };
 
 const stats = [
@@ -52,6 +60,26 @@ const stats = [
     title: "Approved",
     icon: Home,
   },
+  {
+    key: "activeRequests",
+    title: "Active",
+    icon: ShieldCheck,
+  },
+  {
+    key: "completedRequests",
+    title: "Completed",
+    icon: CircleCheck,
+  },
+  {
+    key: "rejectedRequests",
+    title: "Rejected",
+    icon: CircleX,
+  },
+  {
+    key: "totalPayments",
+    title: "Total Payments",
+    icon: Wallet,
+  },
 ] as const;
 
 export default function LandlordDashboardStats({
@@ -61,6 +89,10 @@ export default function LandlordDashboardStats({
   totalRequests,
   pendingRequests,
   approvedRequests,
+  activeRequests,
+  completedRequests,
+  rejectedRequests,
+  totalPayments,
 }: LandlordDashboardStatsProps) {
   const values = {
     totalProperties,
@@ -68,11 +100,15 @@ export default function LandlordDashboardStats({
     unavailableProperties,
     totalRequests,
     pendingRequests,
+    activeRequests,
+    completedRequests,
+    rejectedRequests,
     approvedRequests,
+    totalPayments
   };
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
       {stats.map((stat) => {
         const Icon = stat.icon;
 
@@ -81,7 +117,7 @@ export default function LandlordDashboardStats({
             key={stat.key}
             className="rounded-2xl transition-shadow hover:shadow-md"
           >
-            <CardContent className="flex items-center justify-between p-5">
+            <CardContent className="flex items-center justify-between md:py-3">
               <div>
                 <p className="text-sm text-muted-foreground">{stat.title}</p>
 

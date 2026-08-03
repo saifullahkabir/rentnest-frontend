@@ -8,6 +8,8 @@ import {
   LogOut,
   Users,
   GitPullRequestArrow,
+  CreditCard,
+  Wallet,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -52,6 +54,11 @@ const roleMenu = {
       label: "Rental Requests",
       href: "/dashboard/landlord/rental-requests",
       icon: GitPullRequestArrow,
+    },
+    {
+      label: "Payments",
+      href: "/dashboard/landlord/payments",
+      icon: Wallet,
     },
   ],
 
