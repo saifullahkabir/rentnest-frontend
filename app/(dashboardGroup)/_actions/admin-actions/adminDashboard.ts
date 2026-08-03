@@ -76,3 +76,27 @@ export const getAllAdminProperties = async () => {
 
   return result;
 };
+
+export const getAllAdminPayments = async () => {
+  const accessToken = await isAccessTokenExist();
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/payments`, {
+    method: "GET",
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+    },
+    cache: "no-store",
+  });
+
+  const result = await res.json();
+
+  if (!res.ok || !result.success) {
+    return {
+      success: false,
+      message: result.message || "Failed to retrieve rental requests.",
+      data: [],
+    };
+  }
+
+  return result;
+};

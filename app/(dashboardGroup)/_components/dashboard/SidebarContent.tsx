@@ -8,8 +8,8 @@ import {
   LogOut,
   Users,
   GitPullRequestArrow,
-  CreditCard,
   Wallet,
+  ListPlus,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -87,6 +87,16 @@ const roleMenu = {
       label: "Properties",
       href: "/dashboard/admin/properties",
       icon: Building2,
+    },
+    {
+      label: "Payments",
+      href: "/dashboard/admin/payments",
+      icon: Wallet,
+    },
+    {
+      label: "Categories",
+      href: "/dashboard/admin/categories",
+      icon: ListPlus,
     },
   ],
 } satisfies Record<
