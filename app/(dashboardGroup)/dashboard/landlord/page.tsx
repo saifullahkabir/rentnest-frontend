@@ -4,6 +4,7 @@ import { getLandlordRentalRequests } from "../../_actions/landlord-actions/landl
 import { LandlordRentalRequest } from "@/lib/types/landlord-rental-request";
 import LandlordDashboardStats from "../../_components/landlord/LandlordDashboardStats";
 import { getLandlordPayments } from "../../_actions/landlord-actions/landlordPayments";
+import { LandlordPayment } from "@/lib/types/landlord-payment";
 
 export default async function LandlordDashboardPage() {
   const [propertiesResult, requestsResult, paymentsResult] = await Promise.all([
@@ -50,7 +51,15 @@ export default async function LandlordDashboardPage() {
     (request: LandlordRentalRequest) => request.status === "REJECTED",
   ).length;
 
+  // payment stats
   const totalPayments = payments.length;
+
+  const totalPaid = payments
+    .filter((payment: LandlordPayment) => payment.status === "COMPLETED")
+    .reduce(
+      (total: number, payment: LandlordPayment) => total + payment.amount,
+      0,
+    );
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -75,6 +84,7 @@ export default async function LandlordDashboardPage() {
         completedRequests={completedRequests}
         rejectedRequests={rejectedRequests}
         totalPayments={totalPayments}
+        totalPaid={totalPaid}
       />
     </div>
   );
