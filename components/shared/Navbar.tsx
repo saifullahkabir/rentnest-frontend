@@ -24,14 +24,14 @@ const navItems = [
     label: "Properties",
     href: "/properties",
   },
-  {
-    label: "About",
-    href: "/about",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-  },
+  // {
+  //   label: "About",
+  //   href: "/about",
+  // },
+  // {
+  //   label: "Contact",
+  //   href: "/contact",
+  // },
 ];
 
 export default function Navbar({ user }: UserProps) {
@@ -61,7 +61,7 @@ export default function Navbar({ user }: UserProps) {
 
   const dashboardHref =
     user?.data?.role === "TENANT"
-      ? "/dashboard"
+      ? "/dashboard/tenant"
       : user?.data?.role === "LANDLORD"
         ? "/dashboard/landlord"
         : "/dashboard/admin";
