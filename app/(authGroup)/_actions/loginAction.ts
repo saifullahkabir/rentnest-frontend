@@ -23,7 +23,7 @@ export const loginAction = async (
 
   const result = await res.json();
 
-  if (!result.success) {
+  if (!res.ok || !result.success) {
     return {
       success: false,
       message: result.message || "Login failed",

@@ -122,7 +122,7 @@ export default function Navbar({ user }: UserProps) {
                 </Button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-64  rounded-lg shadow-lg border  py-2 z-10 bg-background backdrop-blur supports-backdrop-filter:bg-background/70">
+                  <div className="absolute right-0 mt-3 w-64  rounded-lg shadow-lg border  py-2 z-10 bg-background/95 ">
                     <div className="border-b px-4 py-4">
                       <p className="font-semibold">{user?.data?.name}</p>
 

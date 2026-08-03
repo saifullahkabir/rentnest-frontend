@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginAction } from "../_actions/loginAction";
+import { toast } from "sonner";
 
 type LoginFormData = {
   email: string;
@@ -35,13 +36,15 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    const result = await loginAction(data, redirectTo);
+    try {
+      const result = await loginAction(data, redirectTo);
 
-    // if (result.success) {
-    //   toast.success(result.message || "Login successful");
-    // } else {
-    //   toast.error(result.message || "Login failed");
-    // }
+      if (!result.success) {
+        toast.error(result.message || "Login failed");
+      }
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
