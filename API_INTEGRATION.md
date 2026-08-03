@@ -26,6 +26,24 @@ Authenticates the user and creates authentication tokens.
 - Authentication flow
 
 ---
+### Register
+
+**Frontend Feature:** Register Page
+
+**Method:** `POST`
+
+**Endpoint:**
+`/api/auth/register`
+
+**Purpose:**
+Create the user.
+
+**Used By:**
+
+- Register Form
+- Authentication flow
+
+---
 
 ### Get Current User
 
@@ -105,7 +123,7 @@ Retrieves properties belonging to the authenticated landlord.
 **Method:** `POST`
 
 **Endpoint:**
-`/api/properties`
+`/api/properties/landlord`
 
 **Frontend Feature:**
 
@@ -121,7 +139,7 @@ Allows a landlord to create a new property.
 **Method:** `PATCH`
 
 **Endpoint:**
-`/api/properties/:id`
+`/api/properties/landlord/:id`
 
 **Frontend Feature:**
 
@@ -137,7 +155,7 @@ Updates an existing landlord property.
 **Method:** `DELETE`
 
 **Endpoint:**
-`/api/properties/:id`
+`/api/properties/landlord/:id`
 
 **Frontend Feature:**
 
@@ -206,7 +224,7 @@ Retrieves rental requests for properties owned by the authenticated landlord.
 **Method:** `PATCH`
 
 **Endpoint:**
-`/api/rental-requests/:id/status`
+`/api/rental-requests/landlord/:id`
 
 **Frontend Feature:**
 

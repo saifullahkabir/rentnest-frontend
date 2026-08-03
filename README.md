@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RentNest
+
+RentNest is a modern rental property platform built with **Next.js, TypeScript, Tailwind CSS, and Shadcn UI**. It provides separate experiences for **Tenants, Landlords, and Admins**.
+
+## Features
+
+- Role-based authentication and dashboards
+- Property browsing and rental requests
+- Landlord property management
+- Rental request management
+- Stripe payment integration
+- Tenant payment history
+- Landlord payment tracking
+- Admin user, property, rental, payment, and category management
+- Responsive and dark-mode friendly UI
+- Structured error handling with toast notifications
+
+## Tech Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Shadcn UI
+- React
+- Stripe
+- REST API
+
+## User Roles
+
+### Tenant
+
+- Browse properties
+- Send rental requests
+- Make Stripe payments
+- View payment history
+- Manage rental activities
+
+### Landlord
+
+- Create, update, and delete properties
+- Manage rental requests
+- View received payments
+- View dashboard statistics
+
+### Admin
+
+- View dashboard statistics
+- Manage users
+- Manage properties
+- Manage rental requests
+- Manage payments
+- Create, update, and delete categories
+
+## Payment
+
+RentNest uses **Stripe Checkout** for real payment processing.
+
+After payment, users are redirected to dedicated **success** or **cancel** pages.
+
+## API Documentation
+
+The frontend consumes the RentNest backend REST APIs.
+
+For the complete mapping of frontend features/components to their corresponding backend endpoints, see:
+
+**`API_INTEGRATION.md`**
+
+## Error Handling
+
+API errors are handled with user-friendly feedback through toast notifications and appropriate UI states.
+
+## Admin Testing
+
+A working admin account is provided for testing the deployed application.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+http://localhost:3000
+```
