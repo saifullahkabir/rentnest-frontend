@@ -1,53 +1,101 @@
-// import AdminDashboardStats from "../../_components/admin/AdminDashboardStats";
-// import { getAdminDashboardData } from "../../_actions/admin-actions/adminDashboard";
+import AdminDashboardStats from "../../_components/admin/AdminDashboardStats";
 
-// export default async function AdminDashboardPage() {
-//   const result = await getAdminDashboardData();
+import {
+  getAllAdminUsers,
+  getAllAdminRentalRequests,
+  getAllAdminProperties,
+  getAllAdminPayments,
+} from "../../_actions/admin-actions/adminDashboard";
 
-//   const data = result.data;
+import { AdminUser } from "@/lib/types/admin-user";
+import { AdminRentalRequest } from "@/lib/types/admin-rental-request";
+import { Property } from "@/lib/types/property";
+import { AdminPayment } from "@/lib/types/admin-payment";
 
-//   const totalUsers = data?.totalUsers ?? 0;
-//   const totalLandlords = data?.totalLandlords ?? 0;
-//   const totalTenants = data?.totalTenants ?? 0;
+export default async function AdminDashboardPage() {
+  const [usersResult, requestsResult, propertiesResult, paymentsResult] =
+    await Promise.all([
+      getAllAdminUsers(),
+      getAllAdminRentalRequests(),
+      getAllAdminProperties(),
+      getAllAdminPayments(),
+    ]);
 
-//   const totalProperties = data?.totalProperties ?? 0;
-//   const availableProperties = data?.availableProperties ?? 0;
-//   const unavailableProperties = data?.unavailableProperties ?? 0;
+  const users = (usersResult.data ?? []) as AdminUser[];
+  const requests = (requestsResult.data ?? []) as AdminRentalRequest[];
+  const properties = (propertiesResult.data ?? []) as Property[];
+  const payments = (paymentsResult.data ?? []) as AdminPayment[];
 
-//   const totalRequests = data?.totalRequests ?? 0;
-//   const pendingRequests = data?.pendingRequests ?? 0;
-//   const activeRentals = data?.activeRentals ?? 0;
-//   const completedRentals = data?.completedRentals ?? 0;
+  // USER STATS
+  const totalUsers = users.length;
 
-//   const totalPayments = data?.totalPayments ?? 0;
-//   const totalRevenue = data?.totalRevenue ?? 0;
+  const totalLandlords = users.filter(
+    (user) => user.role === "LANDLORD",
+  ).length;
 
-//   return (
-//     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-//       <div className="mb-8">
-//         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-//           Admin Dashboard
-//         </h1>
+  const totalTenants = users.filter((user) => user.role === "TENANT").length;
 
-//         <p className="mt-2 text-sm text-muted-foreground">
-//           Overview of users, properties, rental activity, and payments.
-//         </p>
-//       </div>
+  // PROPERTY STATS
+  const totalProperties = properties.length;
 
-//       <AdminDashboardStats
-//         totalUsers={totalUsers}
-//         totalLandlords={totalLandlords}
-//         totalTenants={totalTenants}
-//         totalProperties={totalProperties}
-//         availableProperties={availableProperties}
-//         unavailableProperties={unavailableProperties}
-//         totalRequests={totalRequests}
-//         pendingRequests={pendingRequests}
-//         activeRentals={activeRentals}
-//         completedRentals={completedRentals}
-//         totalPayments={totalPayments}
-//         totalRevenue={totalRevenue}
-//       />
-//     </div>
-//   );
-// }
+  const availableProperties = properties.filter(
+    (property) => property.availability === "AVAILABLE",
+  ).length;
+
+  const unavailableProperties = properties.filter(
+    (property) => property.availability === "UNAVAILABLE",
+  ).length;
+
+  // RENTAL REQUEST STATS
+  const totalRequests = requests.length;
+
+  const pendingRequests = requests.filter(
+    (request) => request.status === "PENDING",
+  ).length;
+
+  const activeRentals = requests.filter(
+    (request) => request.status === "ACTIVE",
+  ).length;
+
+  const completedRentals = requests.filter(
+    (request) => request.status === "COMPLETED",
+  ).length;
+
+  // PAYMENT STATS
+  const totalPayments = payments.length;
+
+  const totalRevenue = payments
+    .filter((payment) => payment.status === "COMPLETED")
+    .reduce((total, payment) => total + payment.amount, 0);
+
+  return (
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          Admin Dashboard
+        </h1>
+
+        <p className="mt-2 text-sm text-muted-foreground">
+          Overview of users, properties, rental activity, and payments.
+        </p>
+      </div>
+
+      {/* Stats */}
+      <AdminDashboardStats
+        totalUsers={totalUsers}
+        totalLandlords={totalLandlords}
+        totalTenants={totalTenants}
+        totalProperties={totalProperties}
+        availableProperties={availableProperties}
+        unavailableProperties={unavailableProperties}
+        totalRequests={totalRequests}
+        pendingRequests={pendingRequests}
+        activeRentals={activeRentals}
+        completedRentals={completedRentals}
+        totalPayments={totalPayments}
+        totalRevenue={totalRevenue}
+      />
+    </div>
+  );
+}

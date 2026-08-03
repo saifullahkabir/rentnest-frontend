@@ -1,6 +1,8 @@
 import Image from "next/image";
+
 import { AdminUser } from "@/lib/types/admin-user";
 import { getAllAdminUsers } from "@/app/(dashboardGroup)/_actions/admin-actions/adminDashboard";
+import UserStatusSelect from "@/app/(dashboardGroup)/_components/admin/UserStatusSelect";
 
 export default async function AdminUsersPage() {
   const result = await getAllAdminUsers();
@@ -43,6 +45,7 @@ export default async function AdminUsersPage() {
             <tbody>
               {users.map((user) => (
                 <tr key={user.id} className="border-b last:border-0">
+                  {/* User */}
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
                       {user.profileImage ? (
@@ -64,28 +67,27 @@ export default async function AdminUsersPage() {
                     </div>
                   </td>
 
+                  {/* Email */}
                   <td className="px-5 py-4 text-muted-foreground">
                     {user.email}
                   </td>
 
+                  {/* Role */}
                   <td className="px-5 py-4">
                     <span className="rounded-lg bg-muted px-2.5 py-1 text-xs font-medium">
                       {user.role}
                     </span>
                   </td>
 
+                  {/* Status */}
                   <td className="px-5 py-4">
-                    <span
-                      className={
-                        user.status === "ACTIVE"
-                          ? "rounded-lg bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-950/40 dark:text-green-400"
-                          : "rounded-lg bg-red-100 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950/40 dark:text-red-400"
-                      }
-                    >
-                      {user.status}
-                    </span>
+                    <UserStatusSelect
+                      userId={user.id}
+                      initialStatus={user.status}
+                    />
                   </td>
 
+                  {/* Joined */}
                   <td className="px-5 py-4 text-muted-foreground">
                     {new Date(user.createdAt).toLocaleDateString("en-GB", {
                       day: "2-digit",

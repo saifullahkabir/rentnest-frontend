@@ -100,3 +100,35 @@ export const getAllAdminPayments = async () => {
 
   return result;
 };
+
+export const updateAdminUserStatus = async (
+  userId: string,
+  status: "ACTIVE" | "BLOCKED",
+) => {
+  const accessToken = await isAccessTokenExist();
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/admin/users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `accessToken=${accessToken}`,
+      },
+      body: JSON.stringify({ status }),
+      cache: "no-store",
+    },
+  );
+
+  const result = await res.json();
+
+  if (!res.ok || !result.success) {
+    return {
+      success: false,
+      message: result.message || "Failed to update user status.",
+      data: [],
+    };
+  }
+
+  return result;
+};
