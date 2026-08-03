@@ -36,14 +36,10 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    try {
-      const result = await loginAction(data, redirectTo);
+    const result = await loginAction(data, redirectTo);
 
-      if (!result.success) {
-        toast.error(result.message || "Login failed");
-      }
-    } catch {
-      toast.error("Something went wrong. Please try again.");
+    if (!result.success) {
+      toast.error(result.message || "Login failed");
     }
   };
 
