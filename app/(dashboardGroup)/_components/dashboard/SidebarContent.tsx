@@ -79,6 +79,11 @@ const roleMenu = {
       icon: Users,
     },
     {
+      label: "Rental Requests",
+      href: "/dashboard/admin/rental-requests",
+      icon: GitPullRequestArrow,
+    },
+    {
       label: "Properties",
       href: "/dashboard/admin/properties",
       icon: Building2,
