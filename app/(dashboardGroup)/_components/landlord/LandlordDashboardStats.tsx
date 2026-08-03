@@ -8,7 +8,6 @@ import {
   Home,
   ClipboardList,
   Wallet,
-  ActivitySquare,
   ShieldCheck,
   CircleCheck,
   CircleX,

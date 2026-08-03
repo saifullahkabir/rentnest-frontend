@@ -4,7 +4,6 @@ import { getLandlordRentalRequests } from "../../_actions/landlord-actions/landl
 import { LandlordRentalRequest } from "@/lib/types/landlord-rental-request";
 import LandlordDashboardStats from "../../_components/landlord/LandlordDashboardStats";
 import { getLandlordPayments } from "../../_actions/landlord-actions/landlordPayments";
-import { LandlordPayment } from "@/lib/types/landlord-payment";
 
 export default async function LandlordDashboardPage() {
   const [propertiesResult, requestsResult, paymentsResult] = await Promise.all([

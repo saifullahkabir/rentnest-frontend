@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { TenantRentalRequest } from "@/lib/types/tenant-rental-request";
+import TenantPayButton from "../TenantPayButton";
 
 type RentalRequestCardProps = {
   request: TenantRentalRequest;
@@ -242,10 +243,7 @@ export default function RentalRequestCard({ request }: RentalRequestCardProps) {
                 )}
 
                 {request.status === "APPROVED" && (
-                  <Button className="rounded-lg bg-blue-600 px-4 shadow-sm shadow-blue-600/20 hover:bg-blue-700">
-                    <CreditCard className="h-4 w-4" />
-                    Pay Now
-                  </Button>
+                  <TenantPayButton rentalRequestId={request.id} />
                 )}
 
                 {request.status === "ACTIVE" && (
