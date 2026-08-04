@@ -19,7 +19,11 @@ export const getLandlordRentalRequests = async () => {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to fetch rental requests.");
+    return {
+      success: false,
+      message: result.message || "Failed to fetch rental requests.",
+      data: [],
+    };
   }
   return result;
 };
@@ -49,9 +53,11 @@ export const updateRentalRequestStatus = async (
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(
-      result.message || "Failed to update rental request status.",
-    );
+    return {
+      success: false,
+      message: result.message || "Failed to update rental request status.",
+      data: null,
+    };
   }
 
   // Refresh this dashboard route's server-rendered data

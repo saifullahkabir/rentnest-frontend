@@ -31,7 +31,11 @@ export const getLandlordProperties = async () => {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to fetch your properties.");
+    return {
+      success: false,
+      message: result.message || "Failed to fetch your properties.",
+      data: [],
+    };
   }
 
   return result;
@@ -55,7 +59,11 @@ export const createProperty = async (data: PropertyFormData) => {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to create property.");
+    return {
+      success: false,
+      message: result.message || "Failed to create property.",
+      data: null,
+    };
   }
 
   return result;
@@ -82,7 +90,11 @@ export const updateProperty = async (
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to update property.");
+    return {
+      success: false,
+      message: result.message || "Failed to update property.",
+      data: null,
+    };
   }
 
   return result;
@@ -104,7 +116,11 @@ export const deleteProperty = async (propertyId: string) => {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to delete property.");
+    return {
+      success: false,
+      message: result.message || "Failed to delete property.",
+      data: null,
+    };
   }
 
   return result;

@@ -18,7 +18,7 @@ export const getLandlordPayments = async () => {
 
   const result = await res.json();
 
-  console.log('payments', result);
+  // console.log('payments', result);
 
   if (!res.ok || !result.success) {
     return {

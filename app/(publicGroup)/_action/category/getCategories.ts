@@ -2,7 +2,7 @@
 
 export const getCategories = async () => {
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`, {
-    cache: "force-cache",
+    cache: "no-store",
   });
 
   const result = await res.json();

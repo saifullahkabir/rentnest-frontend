@@ -19,7 +19,11 @@ export const getMyRentalRequests = async () => {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to fetch rental requests.");
+    return {
+      success: false,
+      message: result.message || "Failed to fetch rental requests.",
+      data: [],
+    };
   }
 
   return result;

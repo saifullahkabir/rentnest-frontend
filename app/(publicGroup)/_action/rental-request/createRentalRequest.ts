@@ -28,7 +28,11 @@ export async function createRentalRequest(payload: CreateRentalRequestPayload) {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to create rental request.");
+    return {
+      success: false,
+      message: result.message || "Failed to create rental request.",
+      data: null,
+    };
   }
 
   return result;

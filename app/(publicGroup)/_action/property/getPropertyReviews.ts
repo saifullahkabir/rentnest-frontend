@@ -15,9 +15,5 @@ export async function getPropertyReviews(
 
   const result = await res.json();
 
-  if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to fetch property reviews");
-  }
-
   return result.data;
 }

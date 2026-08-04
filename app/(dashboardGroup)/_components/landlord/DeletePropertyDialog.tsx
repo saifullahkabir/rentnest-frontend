@@ -39,7 +39,13 @@ export default function DeletePropertyDialog({
 
       const result = await deleteProperty(property.id);
 
-      toast.success(result.message || "Property deleted successfully.");
+      if (result.success) {
+        toast.success(result.message || "Property deleted successfully.");
+      }
+
+      if (!result.success) {
+        toast.error(result.message || "Property cannot be deleted.");
+      }
 
       setOpen(false);
 

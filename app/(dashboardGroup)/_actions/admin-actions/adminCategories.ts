@@ -71,7 +71,11 @@ export const updateCategory = async (categoryId: string, name: string) => {
   const result = await res.json();
 
   if (!res.ok || !result.success) {
-    throw new Error(result.message || "Failed to update category.");
+    return {
+      success: false,
+      message: result.message || "Failed to update category.",
+      data: null,
+    };
   }
 
   return result;
