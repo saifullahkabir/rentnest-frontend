@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { getMe } from "@/service/getMe";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Profile | RentNest",
@@ -161,9 +162,12 @@ export default async function ProfilePage() {
 
                 <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-3xl border-4 border-card bg-muted shadow-lg sm:h-32 sm:w-32">
                   {user.profileImage ? (
-                    <img
+                    <Image
                       src={user.profileImage}
                       alt={`${user.name}'s profile`}
+                      width={50}
+                      height={50}
+                      unoptimized
                       className="h-full w-full object-cover"
                     />
                   ) : (

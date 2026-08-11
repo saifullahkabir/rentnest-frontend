@@ -76,12 +76,13 @@ export default function HeroSection() {
 
           <div className="relative overflow-hidden rounded-3xl border bg-card shadow-xl">
             <Image
-              src="/hero-house.jpg"
+              src="/hero-house.webp"
               alt="Modern House"
               width={700}
               height={700}
               className="h-full w-full object-cover"
               priority
+              unoptimized
             />
           </div>
 

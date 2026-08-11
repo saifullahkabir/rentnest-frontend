@@ -3,6 +3,7 @@
 import { IPropertyQuery } from "@/lib/types/property";
 
 export const getProperties = async ({ query }: { query?: IPropertyQuery }) => {
+  const start = performance.now();
   const params = new URLSearchParams();
 
   if (query?.searchTerm) {
@@ -50,6 +51,12 @@ export const getProperties = async ({ query }: { query?: IPropertyQuery }) => {
   );
 
   const result = await res.json();
+
+   console.log(
+    "getProperties:",
+    Math.round(performance.now() - start),
+    "ms"
+  );
 
   return result;
 };
