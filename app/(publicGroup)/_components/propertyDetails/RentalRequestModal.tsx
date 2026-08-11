@@ -57,6 +57,18 @@ export default function RentalRequestModal({
 
       const result = await createRentalRequest(payload);
 
+      if (result.statusCode === 401) {
+        onOpenChange(false);
+
+        router.push(
+          `/auth/login?redirectTo=${encodeURIComponent(
+            `/properties/${propertyId}`,
+          )}`,
+        );
+
+        return;
+      }
+
       if (result.success) {
         toast.success(
           result.message || "Rental request submitted successfully.",

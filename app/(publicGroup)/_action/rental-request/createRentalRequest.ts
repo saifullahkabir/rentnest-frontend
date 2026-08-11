@@ -8,8 +8,22 @@ interface CreateRentalRequestPayload {
   message?: string;
 }
 
-export async function createRentalRequest(payload: CreateRentalRequestPayload) {
-  const accessToken = await isAccessTokenExist();
+export async function createRentalRequest(
+  payload: CreateRentalRequestPayload,
+) {
+  const authResult = await isAccessTokenExist();
+
+  // User is not logged in
+  if (!authResult || typeof authResult !== "string") {
+    return {
+      success: false,
+      statusCode: 401,
+      message: "Please login to submit a rental request.",
+      data: null,
+    };
+  }
+
+  const accessToken = authResult;
 
   const res = await fetch(
     `${process.env.BACKEND_API_URL}/api/rental-requests`,
@@ -17,7 +31,6 @@ export async function createRentalRequest(payload: CreateRentalRequestPayload) {
       method: "POST",
       headers: {
         Cookie: `accessToken=${accessToken}`,
-
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
@@ -30,7 +43,9 @@ export async function createRentalRequest(payload: CreateRentalRequestPayload) {
   if (!res.ok || !result.success) {
     return {
       success: false,
-      message: result.message || "Failed to create rental request.",
+      statusCode: res.status,
+      message:
+        result.message || "Failed to create rental request.",
       data: null,
     };
   }
