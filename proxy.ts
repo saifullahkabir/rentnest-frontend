@@ -5,7 +5,13 @@ import { getNewAccessToken } from "./service/getNewAccessToken";
 
 const AUTH_ROUTES = ["/auth/login", "/auth/register"];
 
-const PUBLIC_ROUTES = ["/", "/properties", "/about"];
+const PUBLIC_ROUTES = [
+  "/",
+  "/properties",
+  "/about",
+  "/terms",
+  "/privacy-policy",
+];
 
 const ROLE_ROUTES = {
   TENANT: "/dashboard/tenant",

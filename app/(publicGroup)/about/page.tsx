@@ -81,9 +81,7 @@ const landlordPoints = [
 export default function AboutPage() {
   return (
     <main className="overflow-hidden">
-      {/* =========================================================
-          HERO
-      ========================================================= */}
+      {/* HERO */}
 
       <section className="relative border-b bg-muted/20">
         {/* Background decoration */}
@@ -132,9 +130,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          STATS
-      ========================================================= */}
+      {/* STATS */}
 
       <section className="border-b">
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x sm:grid-cols-4">
@@ -147,17 +143,13 @@ export default function AboutPage() {
                 {stat.value}
               </p>
 
-              <p className="mt-1 text-sm text-muted-foreground">
-                {stat.label}
-              </p>
+              <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* =========================================================
-          OUR STORY
-      ========================================================= */}
+      {/* OUR STORY */}
 
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -257,10 +249,10 @@ export default function AboutPage() {
                 </p>
 
                 <p className="leading-7">
-                  RentNest brings both sides together in one organized
-                  platform. Tenants can discover properties and submit rental
-                  requests, while landlords can manage their properties and
-                  respond to requests from a dedicated dashboard.
+                  RentNest brings both sides together in one organized platform.
+                  Tenants can discover properties and submit rental requests,
+                  while landlords can manage their properties and respond to
+                  requests from a dedicated dashboard.
                 </p>
 
                 <p className="leading-7">
@@ -274,9 +266,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          WHY RENTNEST
-      ========================================================= */}
+      {/* WHY RENTNEST */}
 
       <section className="border-y bg-muted/20 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -320,9 +310,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          FOR TENANTS & LANDLORDS
-      ========================================================= */}
+      {/* FOR TENANTS & LANDLORDS */}
 
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -357,10 +345,7 @@ export default function AboutPage() {
 
               <ul className="mt-6 space-y-3">
                 {tenantPoints.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 text-sm"
-                  >
+                  <li key={point} className="flex items-start gap-3 text-sm">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span>{point}</span>
                   </li>
@@ -389,16 +374,13 @@ export default function AboutPage() {
               </div>
 
               <p className="mt-5 text-sm leading-6 text-muted-foreground">
-                Manage your rental properties, requests, and tenant
-                interactions through a dedicated workflow.
+                Manage your rental properties, requests, and tenant interactions
+                through a dedicated workflow.
               </p>
 
               <ul className="mt-6 space-y-3">
                 {landlordPoints.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 text-sm"
-                  >
+                  <li key={point} className="flex items-start gap-3 text-sm">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span>{point}</span>
                   </li>
@@ -416,9 +398,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          SECURITY
-      ========================================================= */}
+      {/* SECURITY */}
 
       <section className="border-y bg-muted/20 py-20">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
@@ -432,8 +412,8 @@ export default function AboutPage() {
 
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-muted-foreground">
             RentNest is built with secure authentication, role-based
-            permissions, protected APIs, and Stripe-powered payment workflows
-            to provide a reliable rental experience.
+            permissions, protected APIs, and Stripe-powered payment workflows to
+            provide a reliable rental experience.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -455,9 +435,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          CTA
-      ========================================================= */}
+      {/* CTA */}
 
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -476,8 +454,8 @@ export default function AboutPage() {
               </h2>
 
               <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-primary-foreground/80 sm:text-base">
-                Explore available properties on RentNest and take the next
-                step toward finding a place that feels like home.
+                Explore available properties on RentNest and take the next step
+                toward finding a place that feels like home.
               </p>
 
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
