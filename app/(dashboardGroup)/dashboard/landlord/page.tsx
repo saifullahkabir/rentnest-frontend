@@ -5,6 +5,13 @@ import { LandlordRentalRequest } from "@/lib/types/landlord-rental-request";
 import LandlordDashboardStats from "../../_components/landlord/LandlordDashboardStats";
 import { getLandlordPayments } from "../../_actions/landlord-actions/landlordPayments";
 import { LandlordPayment } from "@/lib/types/landlord-payment";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Landlord Dashboard | RentNest",
+  description:
+    "Manage your rental properties, rental requests, payments, and landlord activities from your RentNest dashboard.",
+};
 
 export default async function LandlordDashboardPage() {
   const [propertiesResult, requestsResult, paymentsResult] = await Promise.all([

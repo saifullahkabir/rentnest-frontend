@@ -11,7 +11,6 @@ import {
   Clock3,
   MapPin,
   MessageSquare,
-  CreditCard,
   Star,
   XCircle,
 } from "lucide-react";

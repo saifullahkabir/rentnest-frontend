@@ -1,6 +1,13 @@
 import { getLandlordRentalRequests } from "@/app/(dashboardGroup)/_actions/landlord-actions/landlordRentalRequests";
 import RentalRequestCard from "@/app/(dashboardGroup)/_components/landlord/RentalRequestCard";
 import { LandlordRentalRequest } from "@/lib/types/landlord-rental-request";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rental Requests | RentNest",
+  description:
+    "Review and manage rental requests submitted by tenants for your properties on RentNest.",
+};
 
 export default async function LandlordRentalRequestsPage() {
   const result = await getLandlordRentalRequests();

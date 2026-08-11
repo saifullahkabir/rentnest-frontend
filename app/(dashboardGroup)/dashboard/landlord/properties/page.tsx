@@ -3,10 +3,19 @@ import MyPropertyCard from "@/app/(dashboardGroup)/_components/landlord/Landlord
 import PropertyFormTrigger from "@/app/(dashboardGroup)/_components/landlord/PropertyFormTrigger";
 import { getCategories } from "@/app/(publicGroup)/_action/category/getCategories";
 import { LandlordProperty } from "@/lib/types/landlord-property";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Properties | RentNest",
+  description:
+    "Manage your rental properties, update property information, and create new listings from your RentNest landlord dashboard.",
+};
 
 export default async function LandlordPropertiesPage() {
-  const propertyResult = await getLandlordProperties();
-  const categoryResult = await getCategories();
+  const [propertyResult, categoryResult] = await Promise.all([
+    getLandlordProperties(),
+    getCategories(),
+  ]);
 
   const properties = propertyResult.data ?? [];
   const categories = categoryResult.data ?? [];

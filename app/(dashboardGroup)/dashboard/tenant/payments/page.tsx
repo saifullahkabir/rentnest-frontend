@@ -2,6 +2,13 @@ import { getMyPayments } from "@/app/(dashboardGroup)/_actions/tenant-actions/te
 import TenantPaymentCard from "@/app/(dashboardGroup)/_components/tenant/TenantPaymentCard";
 import { TenantPayment } from "@/lib/types/tenant-payment";
 import { CheckCircle2, Clock3, CreditCard } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Payments | RentNest",
+  description:
+    "View your rental payment history, completed transactions, pending payments, and payment details on RentNest.",
+};
 
 export default async function TenantPaymentsPage() {
   const result = await getMyPayments();
