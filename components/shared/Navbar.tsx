@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Profiler, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-import { Menu, X, LogOut, User, LayoutDashboard } from "lucide-react";
+import { Menu, X, LogOut, User, LayoutDashboard, User2 } from "lucide-react";
 
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -131,6 +131,14 @@ export default function Navbar({ user }: UserProps) {
                       </p>
                     </div>
 
+                    <Link
+                      href="/profile"
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="flex items-center gap-3 px-4 py-3 transition hover:bg-muted"
+                    >
+                      <User2 size={18} />
+                      Profile
+                    </Link>
                     <Link
                       href={dashboardHref}
                       onClick={() => setIsDropdownOpen(false)}

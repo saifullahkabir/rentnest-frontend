@@ -51,7 +51,6 @@ export default function DeletePropertyDialog({
 
       router.refresh();
     } catch (error) {
-      console.log(error);
       toast.error(
         error instanceof Error ? error.message : "Failed to delete property.",
       );

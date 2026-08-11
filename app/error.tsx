@@ -21,7 +21,6 @@ export default function ErrorPage({
     <main className="flex min-h-[calc(100vh-6rem)] items-center justify-center px-6">
       <div className="w-full max-w-xl">
         <div className="rounded-3xl border bg-card/70 backdrop-blur-xl p-10 shadow-2xl text-center">
-
           {/* Icon */}
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-destructive/10">
             <AlertTriangle className="h-10 w-10 text-destructive" />
@@ -34,8 +33,8 @@ export default function ErrorPage({
 
           {/* Description */}
           <p className="mt-3 text-muted-foreground leading-7">
-            An unexpected error occurred while loading this page.
-            Please try again. If the problem persists, return to the homepage.
+            An unexpected error occurred while loading this page. Please try
+            again. If the problem persists, return to the homepage.
           </p>
 
           {/* Error Message (Development Only) */}
@@ -53,25 +52,17 @@ export default function ErrorPage({
 
           {/* Buttons */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-
-            <Button
-              onClick={() => reset()}
-              className="gap-2"
-            >
+            <Button onClick={() => reset()} className="gap-2">
               <RotateCcw className="h-4 w-4" />
               Try Again
             </Button>
 
-            <Button
-              variant="outline"
-              asChild
-            >
+            <Button variant="outline" asChild>
               <Link href="/">
                 <Home className="mr-2 h-4 w-4" />
                 Back to Home
               </Link>
             </Button>
-
           </div>
         </div>
       </div>

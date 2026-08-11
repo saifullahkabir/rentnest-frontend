@@ -10,7 +10,6 @@ export default async function HomePage() {
   const categoriesResult = await getCategories();
 
   const categories = categoriesResult.data ?? [];
-  console.log(categories);
   return (
     <div>
       <HeroSection />
