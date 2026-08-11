@@ -24,10 +24,10 @@ const navItems = [
     label: "Properties",
     href: "/properties",
   },
-  // {
-  //   label: "About",
-  //   href: "/about",
-  // },
+  {
+    label: "About",
+    href: "/about",
+  },
   // {
   //   label: "Contact",
   //   href: "/contact",
